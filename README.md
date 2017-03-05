@@ -1,24 +1,8 @@
-# README
+# Tuesdays With Toni App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Upcoming Lessons
 
-Things you may want to cover:
+Displays all upcoming lessons, including when they are scheduled and which mods/programs they are recommended for.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Week 6 Lesson Voting
+Allows registered users to submit requests for the week 6 lesson topic. Users can then vote up to 3 times during the mod for which lesson they want covered in week 6.
