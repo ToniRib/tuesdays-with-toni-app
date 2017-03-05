@@ -38,4 +38,14 @@ FactoryGirl.define do
     name '1510 Backend'
     program
   end
+
+  factory :user do
+    first_name 'Toni'
+    last_name 'Rib'
+    email 'toni@testemail.com'
+    username 'tonirib'
+    password 'password'
+    password_confirmation 'password'
+    cohort
+  end
 end

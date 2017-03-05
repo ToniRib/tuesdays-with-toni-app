@@ -274,6 +274,42 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    email character varying NOT NULL,
+    username character varying NOT NULL,
+    password_digest character varying NOT NULL,
+    cohort_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
 -- Name: voted_lesson_topics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -359,6 +395,13 @@ ALTER TABLE ONLY programs ALTER COLUMN id SET DEFAULT nextval('programs_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY voted_lesson_topics ALTER COLUMN id SET DEFAULT nextval('voted_lesson_topics_id_seq'::regclass);
 
 
@@ -435,6 +478,14 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: voted_lesson_topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -485,6 +536,13 @@ CREATE INDEX index_program_mods_on_program_id ON program_mods USING btree (progr
 
 
 --
+-- Name: index_users_on_cohort_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_cohort_id ON users USING btree (cohort_id);
+
+
+--
 -- Name: fk_rails_1505f3cd86; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -525,6 +583,14 @@ ALTER TABLE ONLY lesson_recommendations
 
 
 --
+-- Name: fk_rails_bb5c38f7a7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT fk_rails_bb5c38f7a7 FOREIGN KEY (cohort_id) REFERENCES cohorts(id);
+
+
+--
 -- Name: fk_rails_e67f1946ec; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -547,6 +613,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305205713'),
 ('20170305205814'),
 ('20170305210028'),
-('20170305214658');
+('20170305214658'),
+('20170305214913');
 
 
