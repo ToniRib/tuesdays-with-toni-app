@@ -8,6 +8,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'pg'
 gem 'bcrypt'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'pry'
