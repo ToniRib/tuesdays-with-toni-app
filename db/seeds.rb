@@ -53,11 +53,11 @@ class Seed
   end
 
   def schedule_lessons
-    LessonDate.create!(lesson: @active_record_lesson, scheduled_date: Date.new(2016, 5, 2))
-    LessonDate.create!(lesson: @rspec_lesson, scheduled_date: Date.new(2016, 5, 9))
-    LessonDate.create!(lesson: @git_lesson, scheduled_date: Date.new(2016, 5, 16))
-    LessonDate.create!(lesson: @configuring_environment_lesson, scheduled_date: Date.new(2016, 5, 23))
-    LessonDate.create!(lesson: @heroku_lesson, scheduled_date: Date.new(2016, 5, 30))
+    ScheduledLesson.create!(lesson: @active_record_lesson, scheduled_date: Date.today - 3.days)
+    ScheduledLesson.create!(lesson: @rspec_lesson, scheduled_date: Date.today + 2.days)
+    ScheduledLesson.create!(lesson: @git_lesson, scheduled_date: Date.today + 9.days)
+    ScheduledLesson.create!(lesson: @configuring_environment_lesson, scheduled_date: Date.today + 16.days)
+    ScheduledLesson.create!(lesson: @heroku_lesson, scheduled_date: Date.today + 22.days)
   end
 
   def add_recommendations

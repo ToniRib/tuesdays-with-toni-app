@@ -4,7 +4,7 @@ FactoryGirl.define do
     description 'How to avoid gitastrophes'
   end
 
-  factory :lesson_date do
+  factory :scheduled_lesson do
     lesson
     scheduled_date Time.now + 7.days
   end
