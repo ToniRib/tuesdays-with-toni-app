@@ -8,4 +8,8 @@ FactoryGirl.define do
     lesson
     scheduled_date Time.now + 7.days
   end
+
+  factory :program do
+    name 'Back End Engineering'
+  end
 end
