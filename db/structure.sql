@@ -113,7 +113,8 @@ CREATE TABLE programs (
     id integer NOT NULL,
     name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    abbreviation character varying
 );
 
 
@@ -230,6 +231,7 @@ SET search_path TO "$user",public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20170305204234'),
 ('20170305204838'),
-('20170305205125');
+('20170305205125'),
+('20170305205339');
 
 

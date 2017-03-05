@@ -11,5 +11,6 @@ FactoryGirl.define do
 
   factory :program do
     name 'Back End Engineering'
+    abbreviation 'BEE'
   end
 end
