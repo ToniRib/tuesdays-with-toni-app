@@ -13,6 +13,7 @@ class Seed
     add_recommendations
     create_voted_lesson_topics
     create_users
+    let_users_vote_on_topics
   end
 
   def create_programs
@@ -91,14 +92,19 @@ class Seed
   end
 
   def create_voted_lesson_topics
-    VotedLessonTopic.create!(topic: 'Capybara Feature Testing')
-    VotedLessonTopic.create!(topic: 'JavaScript ES6')
-    VotedLessonTopic.create!(topic: 'Testing React')
+    @capybara = VotedLessonTopic.create!(topic: 'Capybara Feature Testing')
+    @jses6 = VotedLessonTopic.create!(topic: 'JavaScript ES6')
   end
 
   def create_users
     @steve = User.create!(first_name: 'Steve', last_name: 'Oscar', username: 'steveo', email: 'steve@test.com', password: 'hello', password_confirmation: 'hello', cohort: @backend_1610)
     @dan = User.create!(first_name: 'Dan', last_name: 'Winter', username: 'danw', email: 'dan@test.com', password: 'hello', password_confirmation: 'hello', cohort: @frontend_1701)
+  end
+
+  def let_users_vote_on_topics
+    UserVote.create!(user: @steve, voted_lesson_topic: @jses6)
+    UserVote.create!(user: @dan, voted_lesson_topic: @jses6)
+    UserVote.create!(user: @dan, voted_lesson_topic: @capybara)
   end
 end
 
