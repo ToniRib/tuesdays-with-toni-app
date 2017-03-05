@@ -316,7 +316,6 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 CREATE TABLE voted_lesson_topics (
     id integer NOT NULL,
     topic character varying NOT NULL,
-    vote_count integer DEFAULT 0,
     archived boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -614,6 +613,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305205814'),
 ('20170305210028'),
 ('20170305214658'),
-('20170305214913');
+('20170305214913'),
+('20170305215457');
 
 

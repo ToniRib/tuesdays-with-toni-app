@@ -78,9 +78,9 @@ class Seed
   end
 
   def create_voted_lesson_topics
-    VotedLessonTopic.create!(topic: 'Capybara Feature Testing', vote_count: 10)
-    VotedLessonTopic.create!(topic: 'JavaScript ES6', vote_count: 4)
-    VotedLessonTopic.create!(topic: 'Testing React', vote_count: 2)
+    VotedLessonTopic.create!(topic: 'Capybara Feature Testing')
+    VotedLessonTopic.create!(topic: 'JavaScript ES6')
+    VotedLessonTopic.create!(topic: 'Testing React')
   end
 end
 
