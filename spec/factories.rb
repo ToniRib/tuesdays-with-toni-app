@@ -17,4 +17,9 @@ FactoryGirl.define do
   factory :mod do
     name 'mod 1'
   end
+
+  factory :program_mod do
+    program
+    mod
+  end
 end
