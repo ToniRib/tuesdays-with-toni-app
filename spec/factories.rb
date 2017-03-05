@@ -13,4 +13,8 @@ FactoryGirl.define do
     name 'Back End Engineering'
     abbreviation 'BEE'
   end
+
+  factory :mod do
+    name 'mod 1'
+  end
 end

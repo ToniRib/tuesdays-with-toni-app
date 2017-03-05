@@ -106,6 +106,37 @@ ALTER SEQUENCE lessons_id_seq OWNED BY lessons.id;
 
 
 --
+-- Name: mods; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE mods (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mods_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mods_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mods_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mods_id_seq OWNED BY mods.id;
+
+
+--
 -- Name: programs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -164,6 +195,13 @@ ALTER TABLE ONLY lessons ALTER COLUMN id SET DEFAULT nextval('lessons_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY mods ALTER COLUMN id SET DEFAULT nextval('mods_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY programs ALTER COLUMN id SET DEFAULT nextval('programs_id_seq'::regclass);
 
 
@@ -189,6 +227,14 @@ ALTER TABLE ONLY lesson_dates
 
 ALTER TABLE ONLY lessons
     ADD CONSTRAINT lessons_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mods_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY mods
+    ADD CONSTRAINT mods_pkey PRIMARY KEY (id);
 
 
 --
@@ -232,6 +278,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305204234'),
 ('20170305204838'),
 ('20170305205125'),
-('20170305205339');
+('20170305205339'),
+('20170305205517');
 
 
