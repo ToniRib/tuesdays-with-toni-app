@@ -42,6 +42,38 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: lesson_dates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lesson_dates (
+    id integer NOT NULL,
+    lesson_id integer,
+    scheduled_date timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lesson_dates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE lesson_dates_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lesson_dates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE lesson_dates_id_seq OWNED BY lesson_dates.id;
+
+
+--
 -- Name: lessons; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -86,6 +118,13 @@ CREATE TABLE schema_migrations (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY lesson_dates ALTER COLUMN id SET DEFAULT nextval('lesson_dates_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY lessons ALTER COLUMN id SET DEFAULT nextval('lessons_id_seq'::regclass);
 
 
@@ -95,6 +134,14 @@ ALTER TABLE ONLY lessons ALTER COLUMN id SET DEFAULT nextval('lessons_id_seq'::r
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: lesson_dates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lesson_dates
+    ADD CONSTRAINT lesson_dates_pkey PRIMARY KEY (id);
 
 
 --
@@ -114,12 +161,28 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
+-- Name: index_lesson_dates_on_lesson_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lesson_dates_on_lesson_id ON lesson_dates USING btree (lesson_id);
+
+
+--
+-- Name: fk_rails_422dd557b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lesson_dates
+    ADD CONSTRAINT fk_rails_422dd557b1 FOREIGN KEY (lesson_id) REFERENCES lessons(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user",public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20170305204234');
+('20170305204234'),
+('20170305204838');
 
 
