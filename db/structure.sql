@@ -42,6 +42,38 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: cohorts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cohorts (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    program_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: cohorts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cohorts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cohorts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cohorts_id_seq OWNED BY cohorts.id;
+
+
+--
 -- Name: lesson_dates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -278,6 +310,13 @@ ALTER SEQUENCE voted_lesson_topics_id_seq OWNED BY voted_lesson_topics.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cohorts ALTER COLUMN id SET DEFAULT nextval('cohorts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY lesson_dates ALTER COLUMN id SET DEFAULT nextval('lesson_dates_id_seq'::regclass);
 
 
@@ -329,6 +368,14 @@ ALTER TABLE ONLY voted_lesson_topics ALTER COLUMN id SET DEFAULT nextval('voted_
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: cohorts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cohorts
+    ADD CONSTRAINT cohorts_pkey PRIMARY KEY (id);
 
 
 --
@@ -396,6 +443,13 @@ ALTER TABLE ONLY voted_lesson_topics
 
 
 --
+-- Name: index_cohorts_on_program_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_cohorts_on_program_id ON cohorts USING btree (program_id);
+
+
+--
 -- Name: index_lesson_dates_on_lesson_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -455,6 +509,14 @@ ALTER TABLE ONLY lesson_recommendations
 
 
 --
+-- Name: fk_rails_a140d90731; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cohorts
+    ADD CONSTRAINT fk_rails_a140d90731 FOREIGN KEY (program_id) REFERENCES programs(id);
+
+
+--
 -- Name: fk_rails_a66c81e682; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -484,6 +546,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305205517'),
 ('20170305205713'),
 ('20170305205814'),
-('20170305210028');
+('20170305210028'),
+('20170305214658');
 
 

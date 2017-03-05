@@ -33,4 +33,9 @@ FactoryGirl.define do
     vote_count 0
     archived false
   end
+
+  factory :cohort do
+    name '1510 Backend'
+    program
+  end
 end
