@@ -7,6 +7,7 @@ gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'pg'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'pry'
