@@ -5,17 +5,30 @@ class Seed
 
   def generate
     create_programs
+    create_cohorts
     create_mods
     create_program_mods
     create_lessons
     schedule_lessons
     add_recommendations
     create_voted_lesson_topics
+    create_users
   end
 
   def create_programs
     @back_end = Program.create!(name: 'Back End Engineering', abbreviation: 'BEE')
     @front_end = Program.create!(name: 'Front End Engineering', abbreviation: 'FEE')
+  end
+
+  def create_cohorts
+    @backend_1610 = Cohort.create!(name: '1610 Backend', program: @back_end)
+    @backend_1611 = Cohort.create!(name: '1611 Backend', program: @back_end)
+    @backend_1701 = Cohort.create!(name: '1701 Backend', program: @back_end)
+    @backend_1703 = Cohort.create!(name: '1703 Backend', program: @back_end)
+    @frontend_1610 = Cohort.create!(name: '1610 Frontend', program: @front_end)
+    @frontend_1611 = Cohort.create!(name: '1611 Frontend', program: @front_end)
+    @frontend_1701 = Cohort.create!(name: '1701 Frontend', program: @front_end)
+    @frontend_1703 = Cohort.create!(name: '1703 Frontend', program: @front_end)
   end
 
   def create_mods
@@ -81,6 +94,11 @@ class Seed
     VotedLessonTopic.create!(topic: 'Capybara Feature Testing')
     VotedLessonTopic.create!(topic: 'JavaScript ES6')
     VotedLessonTopic.create!(topic: 'Testing React')
+  end
+
+  def create_users
+    @steve = User.create!(first_name: 'Steve', last_name: 'Oscar', username: 'steveo', email: 'steve@test.com', password: 'hello', password_confirmation: 'hello', cohort: @backend_1610)
+    @dan = User.create!(first_name: 'Dan', last_name: 'Winter', username: 'danw', email: 'dan@test.com', password: 'hello', password_confirmation: 'hello', cohort: @frontend_1701)
   end
 end
 
