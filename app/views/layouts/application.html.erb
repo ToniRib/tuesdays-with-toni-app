@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TuesdaysWithToniApp</title>
+    <title>TuesdaysWithToni</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
   <body>
-    <%= yield %>
+    <div class="row">
+      <div class="col-sm-12" id="main-title">
+        Tuesdays With Toni
+      </div>
+    </div>
+
+    <%= render partial: 'layouts/navbar' %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

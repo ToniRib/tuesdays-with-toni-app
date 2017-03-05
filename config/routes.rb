@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'upcoming_lessons#index'
+
+  get 'upcoming_lessons', to: 'upcoming_lessons#index'
+  get 'week_six', to: 'voting#index'
+  get 'contact', to: 'contact#index'
+  get 'about', to: 'about#index'
 end
