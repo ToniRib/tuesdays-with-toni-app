@@ -274,6 +274,38 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: user_votes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_votes (
+    id integer NOT NULL,
+    user_id integer,
+    voted_lesson_topic_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: user_votes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_votes_id_seq OWNED BY user_votes.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -394,6 +426,13 @@ ALTER TABLE ONLY programs ALTER COLUMN id SET DEFAULT nextval('programs_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY user_votes ALTER COLUMN id SET DEFAULT nextval('user_votes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -477,6 +516,14 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
+-- Name: user_votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_votes
+    ADD CONSTRAINT user_votes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -535,6 +582,20 @@ CREATE INDEX index_program_mods_on_program_id ON program_mods USING btree (progr
 
 
 --
+-- Name: index_user_votes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_votes_on_user_id ON user_votes USING btree (user_id);
+
+
+--
+-- Name: index_user_votes_on_voted_lesson_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_votes_on_voted_lesson_topic_id ON user_votes USING btree (voted_lesson_topic_id);
+
+
+--
 -- Name: index_users_on_cohort_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -555,6 +616,22 @@ ALTER TABLE ONLY program_mods
 
 ALTER TABLE ONLY lesson_dates
     ADD CONSTRAINT fk_rails_422dd557b1 FOREIGN KEY (lesson_id) REFERENCES lessons(id);
+
+
+--
+-- Name: fk_rails_54f8e1677c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_votes
+    ADD CONSTRAINT fk_rails_54f8e1677c FOREIGN KEY (voted_lesson_topic_id) REFERENCES voted_lesson_topics(id);
+
+
+--
+-- Name: fk_rails_917cb3e60d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_votes
+    ADD CONSTRAINT fk_rails_917cb3e60d FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -614,6 +691,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305210028'),
 ('20170305214658'),
 ('20170305214913'),
-('20170305215457');
+('20170305215457'),
+('20170305220202');
 
 

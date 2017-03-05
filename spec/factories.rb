@@ -47,4 +47,9 @@ FactoryGirl.define do
     password_confirmation 'password'
     cohort
   end
+
+  factory :user_vote do
+    user
+    voted_lesson_topic
+  end
 end
