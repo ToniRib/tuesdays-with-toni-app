@@ -242,6 +242,39 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: voted_lesson_topics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE voted_lesson_topics (
+    id integer NOT NULL,
+    topic character varying NOT NULL,
+    vote_count integer DEFAULT 0,
+    archived boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: voted_lesson_topics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE voted_lesson_topics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: voted_lesson_topics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE voted_lesson_topics_id_seq OWNED BY voted_lesson_topics.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -281,6 +314,13 @@ ALTER TABLE ONLY program_mods ALTER COLUMN id SET DEFAULT nextval('program_mods_
 --
 
 ALTER TABLE ONLY programs ALTER COLUMN id SET DEFAULT nextval('programs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY voted_lesson_topics ALTER COLUMN id SET DEFAULT nextval('voted_lesson_topics_id_seq'::regclass);
 
 
 --
@@ -345,6 +385,14 @@ ALTER TABLE ONLY programs
 
 ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: voted_lesson_topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY voted_lesson_topics
+    ADD CONSTRAINT voted_lesson_topics_pkey PRIMARY KEY (id);
 
 
 --
@@ -435,6 +483,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305205339'),
 ('20170305205517'),
 ('20170305205713'),
-('20170305205814');
+('20170305205814'),
+('20170305210028');
 
 

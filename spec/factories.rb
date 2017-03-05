@@ -27,4 +27,10 @@ FactoryGirl.define do
     lesson
     program_mod
   end
+
+  factory :voted_lesson_topic do
+    topic 'Heroku AddOns'
+    vote_count 0
+    archived false
+  end
 end
