@@ -74,6 +74,38 @@ ALTER SEQUENCE lesson_dates_id_seq OWNED BY lesson_dates.id;
 
 
 --
+-- Name: lesson_recommendations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lesson_recommendations (
+    id integer NOT NULL,
+    lesson_id integer,
+    program_mod_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lesson_recommendations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE lesson_recommendations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lesson_recommendations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE lesson_recommendations_id_seq OWNED BY lesson_recommendations.id;
+
+
+--
 -- Name: lessons; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -220,6 +252,13 @@ ALTER TABLE ONLY lesson_dates ALTER COLUMN id SET DEFAULT nextval('lesson_dates_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY lesson_recommendations ALTER COLUMN id SET DEFAULT nextval('lesson_recommendations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY lessons ALTER COLUMN id SET DEFAULT nextval('lessons_id_seq'::regclass);
 
 
@@ -258,6 +297,14 @@ ALTER TABLE ONLY ar_internal_metadata
 
 ALTER TABLE ONLY lesson_dates
     ADD CONSTRAINT lesson_dates_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lesson_recommendations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lesson_recommendations
+    ADD CONSTRAINT lesson_recommendations_pkey PRIMARY KEY (id);
 
 
 --
@@ -308,6 +355,20 @@ CREATE INDEX index_lesson_dates_on_lesson_id ON lesson_dates USING btree (lesson
 
 
 --
+-- Name: index_lesson_recommendations_on_lesson_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lesson_recommendations_on_lesson_id ON lesson_recommendations USING btree (lesson_id);
+
+
+--
+-- Name: index_lesson_recommendations_on_program_mod_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lesson_recommendations_on_program_mod_id ON lesson_recommendations USING btree (program_mod_id);
+
+
+--
 -- Name: index_program_mods_on_mod_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -338,6 +399,22 @@ ALTER TABLE ONLY lesson_dates
 
 
 --
+-- Name: fk_rails_94a920bb24; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lesson_recommendations
+    ADD CONSTRAINT fk_rails_94a920bb24 FOREIGN KEY (lesson_id) REFERENCES lessons(id);
+
+
+--
+-- Name: fk_rails_a66c81e682; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lesson_recommendations
+    ADD CONSTRAINT fk_rails_a66c81e682 FOREIGN KEY (program_mod_id) REFERENCES program_mods(id);
+
+
+--
 -- Name: fk_rails_e67f1946ec; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -357,6 +434,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305205125'),
 ('20170305205339'),
 ('20170305205517'),
-('20170305205713');
+('20170305205713'),
+('20170305205814');
 
 

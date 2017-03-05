@@ -22,4 +22,9 @@ FactoryGirl.define do
     program
     mod
   end
+
+  factory :lesson_recommendation do
+    lesson
+    program_mod
+  end
 end
