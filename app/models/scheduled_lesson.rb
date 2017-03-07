@@ -1,6 +1,8 @@
 class ScheduledLesson < ApplicationRecord
   belongs_to :lesson
 
+  delegate :recommendations, to: :lesson
+
   def self.upcoming
     select(<<-SQL.squish)
         scheduled_lessons.scheduled_date, 
