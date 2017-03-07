@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Vote For The Week 6 Topic</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <ul>
+      <% @active_voted_lesson_topics.each do |lesson_topic| %>
+          <li id="voted-lesson-topic-<%= lesson_topic.id %>">
+            <%= lesson_topic.topic %> (<%= pluralize(lesson_topic.vote_count, 'vote') %>)
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
