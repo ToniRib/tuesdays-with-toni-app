@@ -1,0 +1,21 @@
+.center-nav {
+  display: inline-block;
+  float: none;
+}
+
+.site-title {
+  font-size: 55px;
+}
+
+.site-title-row {
+  background-color: #f8f8f8;
+}
+
+nav li {
+  margin: 0 20px;
+}
+
+.navbar-nav > li > a {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
