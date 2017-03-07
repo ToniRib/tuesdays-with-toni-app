@@ -10,7 +10,7 @@ class ScheduledLesson < ApplicationRecord
         lessons.description
       SQL
       .joins(:lesson)
-      .where('scheduled_date >= ?', Date.today)
+      .where('scheduled_date >= ?', Date.today.beginning_of_day)
       .order('scheduled_date ASC')
   end
 end
