@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get 'week_six', to: 'voting#index'
   get 'contact', to: 'contact#index'
   get 'about', to: 'about#index'
+  get 'login', to: 'sessions#new'
 end

@@ -25,7 +25,23 @@ feature 'Guest viewing week six lesson vote', type: :feature do
     end
   end
 
-  xscenario 'cannot vote for a topic'
-  xscenario 'cannot add a new topic'
-  xscenario 'sees a link to sign in for voting'
+  scenario 'cannot vote for a topic' do
+    visit week_six_path
+
+    within("#voted-lesson-topic-#{active_lesson_topic.id}") do
+      expect(page).not_to have_css '.upvote'
+    end
+  end
+
+  scenario 'cannot add a new topic' do
+    visit week_six_path
+
+    expect(page).not_to have_content 'Add Topic'
+  end
+
+  scenario 'sees a link to log in for voting' do
+    visit week_six_path
+
+    expect(page).to have_link 'Log In', href: login_path
+  end
 end
