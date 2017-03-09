@@ -10,8 +10,10 @@
 </div>
 <div class="row add-topic">
   <div class="col-sm-12">
-    <% unless current_user %>
-      <p>Want to add or vote for a topic? <%= link_to 'Log In', login_path %></p>
+    <% if current_user %>
+        <%= render partial: 'add_topic' %>
+    <% else %>
+        <p>Want to add or vote for a topic? <%= link_to 'Log In', login_path %></p>
     <% end %>
   </div>
 </div>
@@ -21,6 +23,9 @@
       <% @active_voted_lesson_topics.each do |lesson_topic| %>
           <li id="voted-lesson-topic-<%= lesson_topic.id %>">
             <%= lesson_topic.topic %> (<%= pluralize(lesson_topic.vote_count, 'vote') %>)
+            <% if current_user %>
+              <span class="upvote">^</span>
+            <% end %>
           </li>
       <% end %>
     </ul>
