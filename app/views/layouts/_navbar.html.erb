@@ -14,6 +14,11 @@
       <li><%= link_to 'Week 6 Lesson Vote', week_six_path %></li>
       <li><%= link_to 'Contact', contact_path %></li>
       <li><%= link_to 'About', about_path %></li>
+      <% if current_user %>
+        <li><%= link_to 'Log Out', logout_path %></li>
+      <% else %>
+        <li><%= link_to 'Log In', login_path %></li>
+      <% end %>
     </ul>
   </div>
 </nav>
