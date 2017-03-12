@@ -9,9 +9,9 @@ module Api
         suggested_topic = SuggestedTopic.new(topic: sanitize(params[:suggested_topic][:topic]))
 
         if suggested_topic.save
-          UserVote.create(user: current_user, suggested_topic: suggested_topic)
+          suggested_topic.user_votes.create!(user: current_user)
 
-          render json: suggested_topic
+          render json: suggested_topic, status: 201
         else
           render json: { error: 'Could not save topic' }, status: 400
         end

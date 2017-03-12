@@ -1,4 +1,6 @@
 class SuggestedTopic < ApplicationRecord
+  validates :topic, presence: true
+
   has_many :user_votes
   has_many :users, through: :user_votes
 
