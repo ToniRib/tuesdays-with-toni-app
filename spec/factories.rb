@@ -29,7 +29,7 @@ FactoryGirl.define do
   end
 
   factory :suggested_topic do
-    name 'Heroku AddOns'
+    sequence(:name) { |n| "Topic #{n}" }
     archived false
   end
 
