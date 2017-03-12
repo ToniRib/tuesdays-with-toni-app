@@ -97,12 +97,12 @@ class Seed
   end
 
   def create_users
-    @steve = User.create!(first_name: 'Steve', last_name: 'Oscar', username: 'steveo', email: 'steve@test.com', password: 'hello', password_confirmation: 'hello', cohort: @backend_1610)
-    @dan = User.create!(first_name: 'Dan', last_name: 'Winter', username: 'danw', email: 'dan@test.com', password: 'hello', password_confirmation: 'hello', cohort: @frontend_1701)
+    @toni = User.create!(first_name: 'Toni', last_name: 'Rib', username: 'tonirib', email: 'toni@test.com', password: 'password', password_confirmation: 'password', cohort: @backend_1610)
+    @dan = User.create!(first_name: 'Dan', last_name: 'Rib', username: 'danrib', email: 'dan@test.com', password: 'password', password_confirmation: 'password', cohort: @frontend_1701)
   end
 
   def let_users_vote_on_topics
-    UserVote.create!(user: @steve, suggested_topic: @jses6)
+    UserVote.create!(user: @toni, suggested_topic: @jses6)
     UserVote.create!(user: @dan, suggested_topic: @jses6)
     UserVote.create!(user: @dan, suggested_topic: @capybara)
   end
