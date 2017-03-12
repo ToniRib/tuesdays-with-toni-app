@@ -9,10 +9,11 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
 
       redirect_to session[:forwarding_url] || root_path
-    # else
-      # account_link = "#{view_context.link_to('Create new account?', new_user_path)}"
-      # flash[:error] = "Invalid login credentials. #{account_link}"
-      # redirect_to login_path
+    else
+      account_link = "#{view_context.link_to('Create new account?', new_user_path)}"
+      flash[:error] = "Invalid login credentials. #{account_link}"
+
+      redirect_to login_path
     end
   end
 
