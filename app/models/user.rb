@@ -3,5 +3,5 @@ class User < ApplicationRecord
 
   belongs_to :cohort
   has_many :user_votes
-  has_many :voted_lesson_topics, through: :user_votes
+  has_many :suggested_topics, through: :user_votes
 end

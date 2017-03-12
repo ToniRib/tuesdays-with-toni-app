@@ -1,4 +1,4 @@
 class UserVote < ApplicationRecord
   belongs_to :user
-  belongs_to :voted_lesson_topic
+  belongs_to :suggested_topic
 end

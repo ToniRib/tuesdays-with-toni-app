@@ -11,7 +11,7 @@ class Seed
     create_lessons
     schedule_lessons
     add_recommendations
-    create_voted_lesson_topics
+    create_suggested_topics
     create_users
     let_users_vote_on_topics
   end
@@ -91,9 +91,9 @@ class Seed
     LessonRecommendation.create!(lesson: @heroku_lesson, program_mod: ProgramMod.find_by(mod_id: @mod4.id, program_id: @front_end.id))
   end
 
-  def create_voted_lesson_topics
-    @capybara = VotedLessonTopic.create!(topic: 'Capybara Feature Testing')
-    @jses6 = VotedLessonTopic.create!(topic: 'JavaScript ES6')
+  def create_suggested_topics
+    @capybara = SuggestedTopic.create!(topic: 'Capybara Feature Testing')
+    @jses6 = SuggestedTopic.create!(topic: 'JavaScript ES6')
   end
 
   def create_users
@@ -102,9 +102,9 @@ class Seed
   end
 
   def let_users_vote_on_topics
-    UserVote.create!(user: @steve, voted_lesson_topic: @jses6)
-    UserVote.create!(user: @dan, voted_lesson_topic: @jses6)
-    UserVote.create!(user: @dan, voted_lesson_topic: @capybara)
+    UserVote.create!(user: @steve, suggested_topic: @jses6)
+    UserVote.create!(user: @dan, suggested_topic: @jses6)
+    UserVote.create!(user: @dan, suggested_topic: @capybara)
   end
 end
 

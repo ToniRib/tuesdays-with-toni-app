@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-describe VotedLessonTopic, type: :model do
+describe SuggestedTopic, type: :model do
   describe 'factory' do
     it 'is valid by default' do
-      expect(build(:voted_lesson_topic)).to be_valid
+      expect(build(:suggested_topic)).to be_valid
     end
   end
 
   describe '.archive_all!' do
-    before { create_list(:voted_lesson_topic, 2, archived: false) }
+    before { create_list(:suggested_topic, 2, archived: false) }
 
     it 'sets archived to true for all existing records' do
       described_class.archive_all!
@@ -18,8 +18,8 @@ describe VotedLessonTopic, type: :model do
   end
 
   describe '.with_vote_counts' do
-    let(:popular_topic) { create(:voted_lesson_topic, topic: 'Popular') }
-    let(:unpopular_topic) { create(:voted_lesson_topic, topic: 'Unpopular') }
+    let(:popular_topic) { create(:suggested_topic, topic: 'Popular') }
+    let(:unpopular_topic) { create(:suggested_topic, topic: 'Unpopular') }
 
     before do
       popular_topic.user_votes << create_list(:user_vote, 5)

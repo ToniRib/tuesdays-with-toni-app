@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      get 'suggested_topics', to: 'lesson_topics#index'
+      resources :suggested_topics, only: [:index, :create]
     end
   end
 end

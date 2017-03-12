@@ -9,7 +9,6 @@ gem 'uglifier'
 gem 'pg'
 gem 'bcrypt'
 gem 'jquery-rails'
-gem 'responders'
 
 group :development, :test do
   gem 'pry'

@@ -28,7 +28,7 @@ FactoryGirl.define do
     program_mod
   end
 
-  factory :voted_lesson_topic do
+  factory :suggested_topic do
     topic 'Heroku AddOns'
     archived false
   end
@@ -50,6 +50,6 @@ FactoryGirl.define do
 
   factory :user_vote do
     user
-    voted_lesson_topic
+    suggested_topic
   end
 end

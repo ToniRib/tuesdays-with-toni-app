@@ -1,4 +1,4 @@
-class VotedLessonTopic < ApplicationRecord
+class SuggestedTopic < ApplicationRecord
   has_many :user_votes
   has_many :users, through: :user_votes
 
@@ -9,9 +9,9 @@ class VotedLessonTopic < ApplicationRecord
   end
 
   def self.with_vote_counts
-    select('voted_lesson_topics.*, COUNT(user_votes.id) as vote_count')
+    select('suggested_topics.*, COUNT(user_votes.id) as vote_count')
       .joins(:user_votes)
-      .group('voted_lesson_topics.id')
+      .group('suggested_topics.id')
       .order('vote_count DESC')
   end
 end

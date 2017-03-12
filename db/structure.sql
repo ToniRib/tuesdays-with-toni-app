@@ -2,12 +2,17 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -30,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE ar_internal_metadata (
@@ -42,7 +47,7 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
--- Name: cohorts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: cohorts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE cohorts (
@@ -74,7 +79,7 @@ ALTER SEQUENCE cohorts_id_seq OWNED BY cohorts.id;
 
 
 --
--- Name: lesson_recommendations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: lesson_recommendations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE lesson_recommendations (
@@ -106,7 +111,7 @@ ALTER SEQUENCE lesson_recommendations_id_seq OWNED BY lesson_recommendations.id;
 
 
 --
--- Name: lessons; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: lessons; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE lessons (
@@ -138,7 +143,7 @@ ALTER SEQUENCE lessons_id_seq OWNED BY lessons.id;
 
 
 --
--- Name: mods; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: mods; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE mods (
@@ -169,7 +174,7 @@ ALTER SEQUENCE mods_id_seq OWNED BY mods.id;
 
 
 --
--- Name: program_mods; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: program_mods; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE program_mods (
@@ -201,7 +206,7 @@ ALTER SEQUENCE program_mods_id_seq OWNED BY program_mods.id;
 
 
 --
--- Name: programs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: programs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE programs (
@@ -233,7 +238,7 @@ ALTER SEQUENCE programs_id_seq OWNED BY programs.id;
 
 
 --
--- Name: scheduled_lessons; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: scheduled_lessons; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE scheduled_lessons (
@@ -265,7 +270,7 @@ ALTER SEQUENCE scheduled_lessons_id_seq OWNED BY scheduled_lessons.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -274,13 +279,45 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: user_votes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: suggested_topics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE suggested_topics (
+    id integer NOT NULL,
+    topic character varying NOT NULL,
+    archived boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: suggested_topics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE suggested_topics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: suggested_topics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE suggested_topics_id_seq OWNED BY suggested_topics.id;
+
+
+--
+-- Name: user_votes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE user_votes (
     id integer NOT NULL,
     user_id integer,
-    voted_lesson_topic_id integer,
+    suggested_topic_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -306,7 +343,7 @@ ALTER SEQUENCE user_votes_id_seq OWNED BY user_votes.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -342,109 +379,77 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: voted_lesson_topics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE voted_lesson_topics (
-    id integer NOT NULL,
-    topic character varying NOT NULL,
-    archived boolean DEFAULT false,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: voted_lesson_topics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE voted_lesson_topics_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: voted_lesson_topics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE voted_lesson_topics_id_seq OWNED BY voted_lesson_topics.id;
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: cohorts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cohorts ALTER COLUMN id SET DEFAULT nextval('cohorts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: lesson_recommendations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lesson_recommendations ALTER COLUMN id SET DEFAULT nextval('lesson_recommendations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: lessons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lessons ALTER COLUMN id SET DEFAULT nextval('lessons_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: mods id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mods ALTER COLUMN id SET DEFAULT nextval('mods_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: program_mods id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY program_mods ALTER COLUMN id SET DEFAULT nextval('program_mods_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: programs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY programs ALTER COLUMN id SET DEFAULT nextval('programs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: scheduled_lessons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY scheduled_lessons ALTER COLUMN id SET DEFAULT nextval('scheduled_lessons_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: suggested_topics id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY suggested_topics ALTER COLUMN id SET DEFAULT nextval('suggested_topics_id_seq'::regclass);
+
+
+--
+-- Name: user_votes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_votes ALTER COLUMN id SET DEFAULT nextval('user_votes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY voted_lesson_topics ALTER COLUMN id SET DEFAULT nextval('voted_lesson_topics_id_seq'::regclass);
-
-
---
--- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ar_internal_metadata
@@ -452,7 +457,7 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
--- Name: cohorts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: cohorts cohorts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cohorts
@@ -460,7 +465,7 @@ ALTER TABLE ONLY cohorts
 
 
 --
--- Name: lesson_recommendations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: lesson_recommendations lesson_recommendations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lesson_recommendations
@@ -468,7 +473,7 @@ ALTER TABLE ONLY lesson_recommendations
 
 
 --
--- Name: lessons_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: lessons lessons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lessons
@@ -476,7 +481,7 @@ ALTER TABLE ONLY lessons
 
 
 --
--- Name: mods_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: mods mods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mods
@@ -484,7 +489,7 @@ ALTER TABLE ONLY mods
 
 
 --
--- Name: program_mods_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: program_mods program_mods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY program_mods
@@ -492,7 +497,7 @@ ALTER TABLE ONLY program_mods
 
 
 --
--- Name: programs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: programs programs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY programs
@@ -500,7 +505,7 @@ ALTER TABLE ONLY programs
 
 
 --
--- Name: scheduled_lessons_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: scheduled_lessons scheduled_lessons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY scheduled_lessons
@@ -508,7 +513,7 @@ ALTER TABLE ONLY scheduled_lessons
 
 
 --
--- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY schema_migrations
@@ -516,7 +521,15 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: user_votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: suggested_topics suggested_topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY suggested_topics
+    ADD CONSTRAINT suggested_topics_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_votes user_votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_votes
@@ -524,7 +537,7 @@ ALTER TABLE ONLY user_votes
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -532,78 +545,70 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: voted_lesson_topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY voted_lesson_topics
-    ADD CONSTRAINT voted_lesson_topics_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_cohorts_on_program_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_cohorts_on_program_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_cohorts_on_program_id ON cohorts USING btree (program_id);
 
 
 --
--- Name: index_lesson_recommendations_on_lesson_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_lesson_recommendations_on_lesson_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_lesson_recommendations_on_lesson_id ON lesson_recommendations USING btree (lesson_id);
 
 
 --
--- Name: index_lesson_recommendations_on_program_mod_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_lesson_recommendations_on_program_mod_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_lesson_recommendations_on_program_mod_id ON lesson_recommendations USING btree (program_mod_id);
 
 
 --
--- Name: index_program_mods_on_mod_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_program_mods_on_mod_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_program_mods_on_mod_id ON program_mods USING btree (mod_id);
 
 
 --
--- Name: index_program_mods_on_program_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_program_mods_on_program_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_program_mods_on_program_id ON program_mods USING btree (program_id);
 
 
 --
--- Name: index_scheduled_lessons_on_lesson_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_scheduled_lessons_on_lesson_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_scheduled_lessons_on_lesson_id ON scheduled_lessons USING btree (lesson_id);
 
 
 --
--- Name: index_user_votes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_user_votes_on_suggested_topic_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_user_votes_on_suggested_topic_id ON user_votes USING btree (suggested_topic_id);
+
+
+--
+-- Name: index_user_votes_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_user_votes_on_user_id ON user_votes USING btree (user_id);
 
 
 --
--- Name: index_user_votes_on_voted_lesson_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_votes_on_voted_lesson_topic_id ON user_votes USING btree (voted_lesson_topic_id);
-
-
---
--- Name: index_users_on_cohort_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_cohort_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_cohort_id ON users USING btree (cohort_id);
 
 
 --
--- Name: fk_rails_1505f3cd86; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: program_mods fk_rails_1505f3cd86; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY program_mods
@@ -611,7 +616,7 @@ ALTER TABLE ONLY program_mods
 
 
 --
--- Name: fk_rails_422dd557b1; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: scheduled_lessons fk_rails_422dd557b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY scheduled_lessons
@@ -619,15 +624,15 @@ ALTER TABLE ONLY scheduled_lessons
 
 
 --
--- Name: fk_rails_54f8e1677c; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_votes fk_rails_54f8e1677c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_votes
-    ADD CONSTRAINT fk_rails_54f8e1677c FOREIGN KEY (voted_lesson_topic_id) REFERENCES voted_lesson_topics(id);
+    ADD CONSTRAINT fk_rails_54f8e1677c FOREIGN KEY (suggested_topic_id) REFERENCES suggested_topics(id);
 
 
 --
--- Name: fk_rails_917cb3e60d; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_votes fk_rails_917cb3e60d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_votes
@@ -635,7 +640,7 @@ ALTER TABLE ONLY user_votes
 
 
 --
--- Name: fk_rails_94a920bb24; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: lesson_recommendations fk_rails_94a920bb24; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lesson_recommendations
@@ -643,7 +648,7 @@ ALTER TABLE ONLY lesson_recommendations
 
 
 --
--- Name: fk_rails_a140d90731; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: cohorts fk_rails_a140d90731; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cohorts
@@ -651,7 +656,7 @@ ALTER TABLE ONLY cohorts
 
 
 --
--- Name: fk_rails_a66c81e682; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: lesson_recommendations fk_rails_a66c81e682; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lesson_recommendations
@@ -659,7 +664,7 @@ ALTER TABLE ONLY lesson_recommendations
 
 
 --
--- Name: fk_rails_bb5c38f7a7; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: users fk_rails_bb5c38f7a7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -667,7 +672,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: fk_rails_e67f1946ec; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: program_mods fk_rails_e67f1946ec; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY program_mods
@@ -678,7 +683,7 @@ ALTER TABLE ONLY program_mods
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20170305204234'),
@@ -693,6 +698,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305214913'),
 ('20170305215457'),
 ('20170305220202'),
-('20170305230548');
+('20170305230548'),
+('20170312205254');
 
 
