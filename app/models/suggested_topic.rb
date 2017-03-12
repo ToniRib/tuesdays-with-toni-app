@@ -1,5 +1,6 @@
 class SuggestedTopic < ApplicationRecord
   validates :name, presence: true
+  validates :name, uniqueness: { scope: :archived, case_sensitive: false }, on: :create
 
   has_many :user_votes
   has_many :users, through: :user_votes

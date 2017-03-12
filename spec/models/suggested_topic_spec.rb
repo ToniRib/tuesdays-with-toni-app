@@ -7,6 +7,41 @@ describe SuggestedTopic, type: :model do
     end
   end
 
+  describe 'validations' do
+    context 'when creating a topic with a duplicate name' do
+      context 'and the original topic is archived' do
+        before { create(:suggested_topic, name: 'ActiveRecord', archived: true) }
+
+        it 'is valid' do
+          expect(build(:suggested_topic, name: 'ActiveRecord')).to be_valid
+        end
+      end
+
+      context 'and the original topic is not archived' do
+        before { create(:suggested_topic, name: 'ActiveRecord', archived: false) }
+
+        it 'is not valid' do
+          expect(build(:suggested_topic, name: 'ActiveRecord')).not_to be_valid
+        end
+
+        it 'is not valid even if the case is different' do
+          expect(build(:suggested_topic, name: 'activerecord')).not_to be_valid
+        end
+      end
+    end
+
+    context 'when archiving a topic with a duplicate name' do
+      before { create(:suggested_topic, name: 'ActiveRecord', archived: true) }
+
+      it 'allows the save' do
+        topic = create(:suggested_topic, name: 'ActiveRecord', archived: false)
+        topic.archived = true
+
+        expect(topic.save).to be true
+      end
+    end
+  end
+
   describe '.archive_all!' do
     before { create_list(:suggested_topic, 2, archived: false) }
 
