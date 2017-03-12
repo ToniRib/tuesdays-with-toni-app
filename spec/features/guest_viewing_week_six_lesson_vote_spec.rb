@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'Guest viewing week six lesson vote', type: :feature, js: true do
   let(:user) { create(:user) }
-  let(:active_suggestion) { create(:suggested_topic, topic: 'Heroku Addons') }
-  let(:archived_suggestion) { create(:suggested_topic, topic: 'Pair Programming', archived: true) }
+  let(:active_suggestion) { create(:suggested_topic, name: 'Heroku Addons') }
+  let(:archived_suggestion) { create(:suggested_topic, name: 'Pair Programming', archived: true) }
 
   before do
     create(:user_vote, user: user, suggested_topic: active_suggestion)
@@ -13,8 +13,8 @@ feature 'Guest viewing week six lesson vote', type: :feature, js: true do
   scenario 'sees the currently submitted, non-archived topics' do
     visit week_six_path
 
-    expect(page).to have_content active_suggestion.topic
-    expect(page).not_to have_content archived_suggestion.topic
+    expect(page).to have_content active_suggestion.name
+    expect(page).not_to have_content archived_suggestion.name
   end
 
   scenario 'sees the number of votes for each topic' do

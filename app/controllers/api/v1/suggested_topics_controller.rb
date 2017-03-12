@@ -6,7 +6,7 @@ module Api
       protect_from_forgery with: :null_session
 
       def create
-        suggested_topic = SuggestedTopic.new(topic: sanitize(params[:suggested_topic][:topic]))
+        suggested_topic = SuggestedTopic.new(name: sanitize(params[:suggested_topic][:name]))
 
         if suggested_topic.save
           suggested_topic.user_votes.create!(user: current_user)

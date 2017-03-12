@@ -12,7 +12,7 @@ var saveTopic = function(topicName) {
     url: '/api/v1/suggested_topics',
     data: {
       suggested_topic: {
-        topic: topicName
+        name: topicName
       }
     },
     success: function(topic) {
@@ -47,7 +47,7 @@ var appendTopic = function(topic) {
 
 var topicString = function(topic) {
   return '<li id="voted-lesson-topic-' + topic.id + '">' +
-         topic.topic + ' (' + currentVoteCount(topic.topic, topic.vote_count) + ')' +
+         topic.name + ' (' + currentVoteCount(topic.name, topic.vote_count) + ')' +
          upvote() + '</li>';
 };
 

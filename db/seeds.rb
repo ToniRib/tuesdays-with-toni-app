@@ -92,8 +92,8 @@ class Seed
   end
 
   def create_suggested_topics
-    @capybara = SuggestedTopic.create!(topic: 'Capybara Feature Testing')
-    @jses6 = SuggestedTopic.create!(topic: 'JavaScript ES6')
+    @capybara = SuggestedTopic.create!(name: 'Capybara Feature Testing')
+    @jses6 = SuggestedTopic.create!(name: 'JavaScript ES6')
   end
 
   def create_users

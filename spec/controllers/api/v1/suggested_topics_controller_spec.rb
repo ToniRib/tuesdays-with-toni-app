@@ -10,7 +10,7 @@ module Api
         let(:params) do
           {
             suggested_topic: {
-              topic: topic_name
+              name: topic_name
             }
           }
         end
@@ -24,7 +24,7 @@ module Api
         it 'sanitizes the topic name' do
           post :create, params: params
 
-          expect(SuggestedTopic.last.topic).to eq sanitized_topic_name
+          expect(SuggestedTopic.last.name).to eq sanitized_topic_name
         end
 
         context 'when the topic saves successfully' do

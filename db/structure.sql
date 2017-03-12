@@ -284,7 +284,7 @@ CREATE TABLE schema_migrations (
 
 CREATE TABLE suggested_topics (
     id integer NOT NULL,
-    topic character varying NOT NULL,
+    name character varying NOT NULL,
     archived boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -699,6 +699,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170305215457'),
 ('20170305220202'),
 ('20170305230548'),
-('20170312205254');
+('20170312205254'),
+('20170312230625');
 
 

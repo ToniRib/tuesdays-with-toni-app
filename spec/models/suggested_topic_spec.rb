@@ -18,8 +18,8 @@ describe SuggestedTopic, type: :model do
   end
 
   describe '.with_vote_counts' do
-    let(:popular_topic) { create(:suggested_topic, topic: 'Popular') }
-    let(:unpopular_topic) { create(:suggested_topic, topic: 'Unpopular') }
+    let(:popular_topic) { create(:suggested_topic, name: 'Popular') }
+    let(:unpopular_topic) { create(:suggested_topic, name: 'Unpopular') }
 
     before do
       popular_topic.user_votes << create_list(:user_vote, 5)
