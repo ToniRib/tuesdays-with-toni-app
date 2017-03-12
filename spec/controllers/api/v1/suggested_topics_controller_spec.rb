@@ -61,7 +61,7 @@ module Api
           it 'returns an error message' do
             post :create, params: params
 
-            expect(response.body).to eq({ error: 'Could not save topic' }.to_json)
+            expect(response.body).to eq({ error: ["Name can't be blank"] }.to_json)
           end
         end
       end

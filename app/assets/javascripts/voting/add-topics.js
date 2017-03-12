@@ -19,8 +19,9 @@ var saveTopic = function(topicName) {
       appendTopic(topic);
       $('#topic').val('');
     },
-    error: function() {
-      alert('Topic could not be saved! Please try again later.');
+    error: function(xhr) {
+      var errorMessage = $.parseJSON(xhr.responseText).error[0];
+      alert('Topic could not be saved! ' + errorMessage);
     }
   });
 };

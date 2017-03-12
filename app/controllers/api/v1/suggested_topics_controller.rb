@@ -13,7 +13,7 @@ module Api
 
           render json: suggested_topic, status: 201
         else
-          render json: { error: 'Could not save topic' }, status: 400
+          render json: { error: suggested_topic.errors.full_messages }, status: 400
         end
       end
 
