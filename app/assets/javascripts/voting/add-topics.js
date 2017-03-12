@@ -4,6 +4,12 @@ $(document).ready(function() {
   $('#add-topic').on('click', function() {
     saveTopic($('#topic').val());
   });
+
+  $('#topic').on('keyup', function(e) {
+    if (e.which === 13) {
+      saveTopic($('#topic').val());
+    }
+  });
 });
 
 var saveTopic = function(topicName) {
