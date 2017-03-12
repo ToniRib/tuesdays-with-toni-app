@@ -20,5 +20,10 @@
     <div class="container">
       <%= yield %>
     </div>
+
+    <script type="text/javascript">
+      var currentUsername;
+      currentUsername = "<%= current_user&.username || '' %>";
+    </script>
   </body>
 </html>

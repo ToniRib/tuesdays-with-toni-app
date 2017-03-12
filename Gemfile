@@ -9,6 +9,7 @@ gem 'uglifier'
 gem 'pg'
 gem 'bcrypt'
 gem 'jquery-rails'
+gem 'responders'
 
 group :development, :test do
   gem 'pry'
@@ -16,7 +17,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.53.4'
   gem 'factory_girl_rails'
   gem 'listen'
 end

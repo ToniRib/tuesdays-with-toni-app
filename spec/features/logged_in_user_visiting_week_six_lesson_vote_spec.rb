@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Logged in user visiting week six lesson vote' do
+feature 'Logged in user visiting week six lesson vote', js: true do
   let(:user) { create(:user) }
   let(:active_lesson_topic) { create(:voted_lesson_topic, topic: 'Heroku Addons') }
   let(:archived_lesson_topic) { create(:voted_lesson_topic, topic: 'Pair Programming', archived: true) }

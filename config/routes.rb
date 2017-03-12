@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      get 'suggested_topics', to: 'lesson_topics#index'
+    end
+  end
 end
