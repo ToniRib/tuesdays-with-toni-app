@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :suggested_topics, only: [:index, :create]
+      resources :user_votes, only: [:create]
     end
   end
 end

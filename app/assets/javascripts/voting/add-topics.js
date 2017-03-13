@@ -50,17 +50,46 @@ var addLessonTopicsToPage = function(topics) {
 
 var appendTopic = function(topic) {
   $('#suggested-topics').append(topicString(topic));
+  addUpvoteHandler(topic);
+};
+
+var addUpvoteHandler = function(topic) {
+  $('#suggested-topic-' + topic.id).find('.upvote').click(upvoteHandler);
+};
+
+var upvoteHandler = function() {
+  var topicId = $(this).parents('.suggested-topic').attr('id').split('-')[2];
+  addUserVote(topicId);
+};
+
+var addUserVote = function(topicId) {
+  $.ajax({
+    type: 'POST',
+    url: '/api/v1/user_votes',
+    data: {
+      suggested_topic: {
+        id: topicId
+      }
+    },
+    success: function(data) {
+      var $topic = $('#suggested-topic-' + topicId);
+
+      $topic.find('.vote-count').html(data.new_vote_count);
+      $topic.find('.vote-name').html('votes');
+      $topic.find('.upvote').prop('disabled', true);
+    }
+  });
 };
 
 var topicString = function(topic) {
-  return '<li id="voted-lesson-topic-' + topic.id + '">' +
+  return '<li class="suggested-topic" id="suggested-topic-' + topic.id + '">' +
          topic.name + ' (' + currentVoteCount(topic.name, topic.vote_count) + ')' +
          upvote() + '</li>';
 };
 
 var upvote = function() {
   if (currentUsername !== '') {
-    return '<span class="upvote"> ^ </span>';
+    return '<button class="upvote btn">⇧</button>';
   } else {
     return '';
   }
@@ -68,8 +97,8 @@ var upvote = function() {
 
 var currentVoteCount = function(topicName, voteCount) {
   if (voteCount > 1) {
-    return voteCount + ' votes';
+    return "<span class='vote-count'>" + voteCount + "</span> <span class='vote-name'>votes</span>";
   } else {
-    return '1 vote';
+    return "<span class='vote-count'>1</span> <span class='vote-name'>vote</span>";
   }
 };

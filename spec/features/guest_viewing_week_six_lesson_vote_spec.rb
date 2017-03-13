@@ -20,7 +20,7 @@ feature 'Guest viewing week six lesson vote', type: :feature, js: true do
   scenario 'sees the number of votes for each topic' do
     visit week_six_path
 
-    within("#voted-lesson-topic-#{active_suggestion.id}") do
+    within("#suggested-topic-#{active_suggestion.id}") do
       expect(page).to have_content '(1 vote)'
     end
   end
@@ -28,7 +28,7 @@ feature 'Guest viewing week six lesson vote', type: :feature, js: true do
   scenario 'cannot vote for a topic' do
     visit week_six_path
 
-    within("#voted-lesson-topic-#{active_suggestion.id}") do
+    within("#suggested-topic-#{active_suggestion.id}") do
       expect(page).not_to have_css '.upvote'
     end
   end

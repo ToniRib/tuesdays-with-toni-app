@@ -22,7 +22,7 @@ feature 'Logged in user visiting week six lesson vote', js: true do
   scenario 'sees the number of votes for each topic' do
     visit week_six_path
 
-    within("#voted-lesson-topic-#{active_suggestion.id}") do
+    within("#suggested-topic-#{active_suggestion.id}") do
       expect(page).to have_content '(1 vote)'
     end
   end
@@ -30,7 +30,7 @@ feature 'Logged in user visiting week six lesson vote', js: true do
   scenario 'can vote for a topic' do
     visit week_six_path
 
-    within("#voted-lesson-topic-#{active_suggestion.id}") do
+    within("#suggested-topic-#{active_suggestion.id}") do
       expect(page).to have_css '.upvote'
     end
   end
