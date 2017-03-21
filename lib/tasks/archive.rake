@@ -3,6 +3,6 @@ namespace :archive do
   task all_votes: :environment do
     Rails.logger.info 'Archiving all voted lesson topics!'
 
-    VotedLessonTopic.archive_all!
+    SuggestedTopic.archive_all!
   end
 end
