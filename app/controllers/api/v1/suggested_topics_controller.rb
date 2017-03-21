@@ -18,7 +18,7 @@ module Api
       end
 
       def index
-        render json: SuggestedTopic.active.with_vote_counts
+        render json: SuggestedTopic.active.with_voting(current_user&.id)
       end
     end
   end

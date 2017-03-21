@@ -52,17 +52,45 @@ describe SuggestedTopic, type: :model do
     end
   end
 
-  describe '.with_vote_counts' do
+  describe '.with_voting' do
     let(:popular_topic) { create(:suggested_topic, name: 'Popular') }
     let(:unpopular_topic) { create(:suggested_topic, name: 'Unpopular') }
+    let(:user) { create(:user) }
+    let(:another_user) { create(:user) }
+    let(:third_user) { create(:user) }
 
     before do
-      popular_topic.user_votes << create_list(:user_vote, 5)
-      unpopular_topic.user_votes << create_list(:user_vote, 1)
+      popular_topic.user_votes.create!(user: user)
+      popular_topic.user_votes.create!(user: third_user)
+      unpopular_topic.user_votes.create!(user: user)
     end
 
-    it 'returns records with their number of votes as vote_count' do
-      expect(described_class.with_vote_counts.map(&:vote_count)).to match [5, 1]
+    it 'returns records sorted by the number of votes descending' do
+      topics_with_votes = described_class.with_voting(user.id)
+
+      expect(topics_with_votes).to match [popular_topic, unpopular_topic]
+    end
+
+    it 'returns records with their associated vote count' do
+      vote_counts = described_class.with_voting(user.id).map(&:vote_count)
+
+      expect(vote_counts).to match [2, 1]
+    end
+
+    context 'when a user has already voted on the topics' do
+      it 'returns false for voting_allowed' do
+        voting_allowed = described_class.with_voting(user.id).map(&:voting_allowed)
+
+        expect(voting_allowed).to match [false, false]
+      end
+    end
+
+    context 'when a user has not voted on the topics' do
+      it 'returns false for voting_allowed' do
+        voting_allowed = described_class.with_voting(another_user.id).map(&:voting_allowed)
+
+        expect(voting_allowed).to match [true, true]
+      end
     end
   end
 end

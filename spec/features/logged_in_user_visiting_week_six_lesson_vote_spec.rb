@@ -27,14 +27,6 @@ feature 'Logged in user visiting week six lesson vote', js: true do
     end
   end
 
-  scenario 'can vote for a topic' do
-    visit week_six_path
-
-    within("#suggested-topic-#{active_suggestion.id}") do
-      expect(page).to have_css '.upvote'
-    end
-  end
-
   scenario 'can add a new topic' do
     visit week_six_path
 

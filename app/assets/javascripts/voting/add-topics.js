@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $('#suggested-topics').empty();
   getLessonTopics();
 
   $('#add-topic').on('click', function() {
@@ -50,7 +51,7 @@ var addLessonTopicsToPage = function(topics) {
 
 var appendTopic = function(topic) {
   $('#suggested-topics').append(topicString(topic));
-  addUpvoteHandler(topic);
+  if (topic.voting_allowed) { addUpvoteHandler(topic); }
 };
 
 var addUpvoteHandler = function(topic) {
@@ -76,7 +77,7 @@ var addUserVote = function(topicId) {
 
       $topic.find('.vote-count').html(data.new_vote_count);
       $topic.find('.vote-name').html('votes');
-      $topic.find('.upvote').prop('disabled', true);
+      $topic.find('.upvote').remove();
     }
   });
 };
@@ -84,11 +85,11 @@ var addUserVote = function(topicId) {
 var topicString = function(topic) {
   return '<li class="suggested-topic" id="suggested-topic-' + topic.id + '">' +
          topic.name + ' (' + currentVoteCount(topic.name, topic.vote_count) + ')' +
-         upvote() + '</li>';
+         upvote(topic) + '</li>';
 };
 
-var upvote = function() {
-  if (currentUsername !== '') {
+var upvote = function(topic) {
+  if (topic.voting_allowed) {
     return '<button class="upvote btn">⇧</button>';
   } else {
     return '';
