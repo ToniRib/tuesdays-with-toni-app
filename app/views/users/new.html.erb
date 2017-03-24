@@ -1,0 +1,50 @@
+<h2>Create a New Account</h2>
+
+<%= form_for @user, :html => { class: "profile-form" } do |f| %>
+    <% if @user.errors.any? %>
+        <h4> <%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved: </h4>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+              <li><strong class="error"> <%= message %> </strong></li>
+          <% end %>
+        </ul>
+    <% end %>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, required: true %>
+      </div>
+      <div class="col-sm-12">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, required: true %>
+      </div>
+      <div class="col-sm-12">
+        <%= f.label :username %>
+        <%= f.text_field :username, required: true %>
+      </div>
+      <div class="col-sm-12">
+        <%= f.label :email %>
+        <%= f.text_field :email, required: true %>
+      </div>
+      <div class="col-sm-12">
+        <%= f.label :password %>
+        <%= f.password_field :password, required: true %>
+      </div>
+      <div class="col-sm-12">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, required: true %>
+      </div>
+
+      <%= f.label :cohort %>
+      <%= f.collection_select :cohort_id, Cohort.all, :id, :name %>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.submit class: "btn" %>
+      </div>
+    </div>
+<% end %>
