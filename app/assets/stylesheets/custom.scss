@@ -3,8 +3,28 @@ $green: #00ff00;
 $blue: #27c8cc;
 $magenta: #b21752;
 
+$darkblue: darken($blue, 10%);
+$lightblue: lighten($blue, 20%);
+$lightmagenta: lighten($magenta, 30%);
+
 body {
   font-family: 'Muli', sans-serif;
+  background-color: black;
+  color: white;
+
+  a {
+    color: $blue;
+    -webkit-transition: color 0.4s ease;
+    -o-transition: color 0.4s ease;
+    -moz-transition: color 0.4s ease;
+    transition: color 0.4s ease;
+
+    &:hover {
+      background-color: black;
+      color: $green;
+      text-decoration: none;
+    }
+  }
 }
 
 .center-nav {
@@ -20,6 +40,10 @@ body {
   background-color: black;
 }
 
+.page-title {
+  color: $yellow;
+}
+
 nav {
   background-color: black;
 
@@ -32,7 +56,6 @@ nav {
   }
 
   .navbar-nav > li > a {
-    color: $blue;
     font-size: 16px;
     letter-spacing: 0.4px;
     margin-top: 5px;
@@ -41,11 +64,26 @@ nav {
 
     &:hover {
       background-color: black;
-      color: $green;
     }
   }
 }
 
+
+// Upcoming Lessons
+.lesson-name {
+  color: $lightmagenta;
+}
+
+.lesson-date {
+  color: $lightblue;
+}
+
+// Week Six Voting
+.voting-description {
+  line-height: 22px;
+}
+
+// Contact
 .contact-info {
   margin-top: 50px;
   font-size: 20px;
