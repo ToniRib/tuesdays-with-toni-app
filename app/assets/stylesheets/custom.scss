@@ -1,3 +1,8 @@
+$yellow: #ffff00;
+$green: #00ff00;
+$blue: #27c8cc;
+$magenta: #b21752;
+
 body {
   font-family: 'Muli', sans-serif;
 }
@@ -18,20 +23,25 @@ body {
 nav {
   background-color: black;
 
+  .icon-bar {
+    background: $yellow;
+  }
+
   li {
     margin: 0 20px;
   }
 
   .navbar-nav > li > a {
-    color: deepskyblue;
+    color: $blue;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    margin-top: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
-    margin-top: 5px;
-    letter-spacing: 0.4px;
 
     &:hover {
       background-color: black;
-      color: greenyellow;
+      color: $green;
     }
   }
 }
