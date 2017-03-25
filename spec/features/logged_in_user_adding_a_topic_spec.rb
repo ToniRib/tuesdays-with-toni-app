@@ -10,7 +10,7 @@ feature 'Logged in user adding a topic', js: true do
   scenario 'sees the topic name with 1 vote' do
     visit week_six_path
 
-    fill_in 'Topic', with: 'ActiveRecord'
+    fill_in 'Topic Name', with: 'ActiveRecord'
     click_on 'Add Topic'
 
     within '#suggested-topics' do

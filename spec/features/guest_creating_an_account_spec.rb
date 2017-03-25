@@ -14,7 +14,7 @@ feature 'Guest creating an account' do
       fill_in 'Username', with: 'tonirib'
       fill_in 'Email', with: 'toni@test.com'
       fill_in 'Password', with: 'password'
-      fill_in 'Password confirmation', with: 'password'
+      fill_in 'Confirm Password', with: 'password'
       select '1510 Backend', from: 'user_cohort_id'
       click_on 'Create User'
 
@@ -33,7 +33,7 @@ feature 'Guest creating an account' do
       fill_in 'Username', with: 'tonitest'
       fill_in 'Email', with: 'alreadytaken@taken.com'
       fill_in 'Password', with: 'password'
-      fill_in 'Password confirmation', with: 'password'
+      fill_in 'Confirm Password', with: 'password'
       select '1510 Backend', from: 'user_cohort_id'
       click_on 'Create User'
 
@@ -50,7 +50,7 @@ feature 'Guest creating an account' do
       fill_in 'Username', with: 'tonitest'
       fill_in 'Email', with: 'tonitest@test.com'
       fill_in 'Password', with: 'password'
-      fill_in 'Password confirmation', with: 'notthesamepassword'
+      fill_in 'Confirm Password', with: 'notthesamepassword'
       select '1510 Backend', from: 'user_cohort_id'
       click_on 'Create User'
 
@@ -67,7 +67,7 @@ feature 'Guest creating an account' do
       fill_in 'Username', with: 'tonitest'
       fill_in 'Email', with: 'tonitest@test.com'
       fill_in 'Password', with: 'short'
-      fill_in 'Password confirmation', with: 'short'
+      fill_in 'Confirm Password', with: 'short'
       select '1510 Backend', from: 'user_cohort_id'
       click_on 'Create User'
 
@@ -84,7 +84,7 @@ feature 'Guest creating an account' do
       fill_in 'Username', with: 'short'
       fill_in 'Email', with: 'tonitest@test.com'
       fill_in 'Password', with: 'password'
-      fill_in 'Password confirmation', with: 'password'
+      fill_in 'Confirm Password', with: 'password'
       select '1510 Backend', from: 'user_cohort_id'
       click_on 'Create User'
 
@@ -101,7 +101,7 @@ feature 'Guest creating an account' do
       fill_in 'Username', with: 'tonirib'
       fill_in 'Email', with: 'tonitest@test.com'
       fill_in 'Password', with: 'password'
-      fill_in 'Password confirmation', with: 'password'
+      fill_in 'Confirm Password', with: 'password'
       select '1510 Backend', from: 'user_cohort_id'
       click_on 'Create User'
 
