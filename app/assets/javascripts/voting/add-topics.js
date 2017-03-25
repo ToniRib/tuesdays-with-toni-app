@@ -90,7 +90,7 @@ var topicString = function(topic) {
 
 var upvote = function(topic) {
   if (topic.voting_allowed) {
-    return '<button class="upvote btn">⇧</button>';
+    return '<span><i class="fa fa-arrow-circle-o-up fa-lg upvote" aria-hidden="true"></i></span>';
   } else {
     return '';
   }

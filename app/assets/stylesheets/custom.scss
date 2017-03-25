@@ -7,23 +7,38 @@ $darkblue: darken($blue, 10%);
 $lightblue: lighten($blue, 20%);
 $lightmagenta: lighten($magenta, 30%);
 
+@mixin ease-transition {
+  -webkit-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  transition: color 0.4s ease;
+}
+
 body {
   font-family: 'Muli', sans-serif;
   background-color: black;
   color: white;
+  letter-spacing: 0.3px;
 
-  a {
+  a,
+  .upvote {
     color: $blue;
-    -webkit-transition: color 0.4s ease;
-    -o-transition: color 0.4s ease;
-    -moz-transition: color 0.4s ease;
-    transition: color 0.4s ease;
+    @include ease-transition;
 
     &:hover {
       background-color: black;
       color: $green;
       text-decoration: none;
     }
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  input {
+    color: black;
+    padding-left: 5px;
   }
 }
 
@@ -46,6 +61,8 @@ body {
 
 nav {
   background-color: black;
+  border-top: solid 2px white;
+  border-bottom: solid 2px white;
 
   .icon-bar {
     background: $yellow;
@@ -81,6 +98,35 @@ nav {
 // Week Six Voting
 .voting-description {
   line-height: 22px;
+}
+
+.current-topics {
+  color: $lightblue;
+}
+
+.suggested-topic {
+  font-size: 20px;
+  list-style: square;
+}
+
+.upvote {
+  margin-left: 20px;
+}
+
+.add-topic-button {
+  -webkit-transition: background 0.4s ease;
+  -o-transition: background 0.4s ease;
+  -moz-transition: background 0.4s ease;
+  transition: background 0.4s ease;
+
+  background: $blue;
+  color: black;
+  margin-left: 20px;
+  padding: 3px 12px;
+
+  &:hover {
+    background: $green;
+  }
 }
 
 // Contact
