@@ -7,9 +7,7 @@ $(document).ready(function() {
   });
 
   $('#topic').on('keyup', function(e) {
-    if (e.which === 13) {
-      saveTopic($('#topic').val());
-    }
+    if (e.which === 13) { saveTopic(); }
   });
 });
 
