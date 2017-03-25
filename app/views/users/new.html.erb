@@ -1,50 +1,79 @@
-<h2>Create a New Account</h2>
+<h2 class="page-title">Create a New Account</h2>
 
 <%= form_for @user, :html => { class: "profile-form" } do |f| %>
-    <% if @user.errors.any? %>
-        <h4> <%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved: </h4>
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-              <li><strong class="error"> <%= message %> </strong></li>
-          <% end %>
-        </ul>
-    <% end %>
-
-    <div class="row">
+    <div class="row create-account-row">
       <div class="col-sm-12">
+        <% if @user.errors.any? %>
+            <h4 class="magenta-text"> <%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved: </h4>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                  <li><strong class="error"> <%= message %> </strong></li>
+              <% end %>
+            </ul>
+        <% end %>
+      </div>
+    </div>
+    <div class="row create-account-row">
+      <div class="col-sm-12 col-md-2">
         <%= f.label :first_name %>
+      </div>
+      <div class="col-sm-12 col-md-10">
         <%= f.text_field :first_name, required: true %>
       </div>
-      <div class="col-sm-12">
+    </div>
+    <div class="row create-account-row">
+      <div class="col-sm-12 col-md-2">
         <%= f.label :last_name %>
+      </div>
+      <div class="col-sm-12 col-md-10">
         <%= f.text_field :last_name, required: true %>
       </div>
-      <div class="col-sm-12">
+    </div>
+    <div class="row create-account-row">
+      <div class="col-sm-12 col-md-2">
         <%= f.label :username %>
+        <p class="helper-text">Must be 6+ chars</p>
+      </div>
+      <div class="col-sm-12 col-md-10">
         <%= f.text_field :username, required: true %>
       </div>
-      <div class="col-sm-12">
+    </div>
+    <div class="row create-account-row">
+      <div class="col-sm-12 col-md-2">
         <%= f.label :email %>
+      </div>
+      <div class="col-sm-12 col-md-10">
         <%= f.text_field :email, required: true %>
       </div>
-      <div class="col-sm-12">
+    </div>
+    <div class="row create-account-row">
+      <div class="col-sm-12 col-md-2">
         <%= f.label :password %>
+        <p class="helper-text">Must be 8+ chars</p>
+      </div>
+      <div class="col-sm-12 col-md-10">
         <%= f.password_field :password, required: true %>
       </div>
-      <div class="col-sm-12">
-        <%= f.label :password_confirmation %>
+    </div>
+    <div class="row create-account-row">
+      <div class="col-sm-12 col-md-2">
+        <%= f.label :password_confirmation, 'Confirm Password' %>
+      </div>
+      <div class="col-sm-12 col-md-10">
         <%= f.password_field :password_confirmation, required: true %>
       </div>
-
-      <%= f.label :cohort %>
-      <%= f.collection_select :cohort_id, Cohort.all, :id, :name %>
     </div>
-
-
-
-    <div class="row">
+    <div class="row create-account-row">
+      <div class="col-sm-12 col-md-2">
+        <%= f.label :cohort, 'Select Cohort' %>
+      </div>
+      <div class="col-sm-12 col-md-10">
+        <%= f.collection_select :cohort_id, Cohort.all, :id, :name %>
+      </div>
+    </div>
+    <div class="row create-account-row">
       <div class="col-sm-12">
-        <%= f.submit class: "btn" %>
+        <%= f.submit class: "btn create-user-button" %>
       </div>
     </div>
 <% end %>
