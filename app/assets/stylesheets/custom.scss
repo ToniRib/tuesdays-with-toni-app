@@ -132,5 +132,12 @@ nav {
 // Contact
 .contact-info {
   margin-top: 50px;
-  font-size: 20px;
+
+  p {
+    font-size: 25px;
+  }
+
+  .contact-type {
+    color: $yellow;
+  }
 }
