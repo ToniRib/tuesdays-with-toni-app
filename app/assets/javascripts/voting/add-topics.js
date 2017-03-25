@@ -3,7 +3,7 @@ $(document).ready(function() {
   getLessonTopics();
 
   $('#add-topic').on('click', function() {
-    saveTopic($('#topic').val());
+    saveTopic();
   });
 
   $('#topic').on('keyup', function(e) {
@@ -13,7 +13,9 @@ $(document).ready(function() {
   });
 });
 
-var saveTopic = function(topicName) {
+var saveTopic = function() {
+  var topicName = $('#topic').val();
+
   $.ajax({
     type: 'POST',
     url: '/api/v1/suggested_topics',
@@ -60,10 +62,7 @@ var addUpvoteHandler = function(topic) {
 
 var upvoteHandler = function() {
   var topicId = $(this).parents('.suggested-topic').attr('id').split('-')[2];
-  addUserVote(topicId);
-};
 
-var addUserVote = function(topicId) {
   $.ajax({
     type: 'POST',
     url: '/api/v1/user_votes',
