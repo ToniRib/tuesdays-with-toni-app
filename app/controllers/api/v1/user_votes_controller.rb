@@ -8,6 +8,8 @@ module Api
         user_vote = current_user.user_votes.new(suggested_topic: suggested_topic)
 
         if user_vote.save
+          Rails.logger.info "Created user vote: { user: #{current_user.id}, topic: #{suggested_topic.id} }"
+
           render json: { new_vote_count: suggested_topic.reload.user_votes.count } , status: 201
         end
       end
