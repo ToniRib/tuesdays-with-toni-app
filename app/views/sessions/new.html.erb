@@ -1,14 +1,22 @@
-<h2>Log In</h2>
+<h2 class="page-title">Log In</h2>
 <%= form_for :session, url: login_path, :html => { class: 'profile_form' } do |f| %>
-    <%= f.label :username %>
-    <%= f.text_field :username  %>
-    <br>
-
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <br>
-
-    <%= f.submit 'Log In',  class: 'btn' %>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.label :username, nil, class: 'username-label' %>
+        <%= f.text_field :username  %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.label :password, nil, class: 'password-label' %>
+        <%= f.password_field :password %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.submit 'Log In',  class: 'btn login-button' %>
+      </div>
+    </div>
 <% end  %>
 
 <p>

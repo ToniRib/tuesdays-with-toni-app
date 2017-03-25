@@ -7,11 +7,18 @@ $darkblue: darken($blue, 10%);
 $lightblue: lighten($blue, 20%);
 $lightmagenta: lighten($magenta, 30%);
 
-@mixin ease-transition {
+@mixin ease-transition-color {
   -webkit-transition: color 0.4s ease;
   -o-transition: color 0.4s ease;
   -moz-transition: color 0.4s ease;
   transition: color 0.4s ease;
+}
+
+@mixin ease-transition-background {
+  -webkit-transition: background 0.4s ease;
+  -o-transition: background 0.4s ease;
+  -moz-transition: background 0.4s ease;
+  transition: background 0.4s ease;
 }
 
 body {
@@ -23,7 +30,7 @@ body {
   a,
   .upvote {
     color: $blue;
-    @include ease-transition;
+    @include ease-transition-color;
 
     &:hover {
       background-color: black;
@@ -114,10 +121,7 @@ nav {
 }
 
 .add-topic-button {
-  -webkit-transition: background 0.4s ease;
-  -o-transition: background 0.4s ease;
-  -moz-transition: background 0.4s ease;
-  transition: background 0.4s ease;
+  @include ease-transition-background;
 
   background: $blue;
   color: black;
@@ -139,5 +143,26 @@ nav {
 
   .contact-type {
     color: $yellow;
+  }
+}
+
+// Log In
+.username-label {
+  margin-right: 5px;
+}
+
+.password-label {
+  margin-right: 7px;
+}
+
+.login-button {
+  @include ease-transition-background;
+
+  background: $blue;
+  color: black;
+  margin: 10px 0;
+
+  &:hover {
+    background: $green;
   }
 }
