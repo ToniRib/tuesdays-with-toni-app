@@ -9,6 +9,7 @@ gem 'uglifier'
 gem 'pg'
 gem 'bcrypt'
 gem 'jquery-rails'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'pry'
