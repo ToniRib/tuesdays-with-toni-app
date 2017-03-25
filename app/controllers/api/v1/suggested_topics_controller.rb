@@ -9,6 +9,8 @@ module Api
         suggested_topic = SuggestedTopic.new(name: sanitize(params[:suggested_topic][:name]))
 
         if suggested_topic.save
+          Rails.logger.info "Created suggested topic: { user: #{current_user.id}, topic: #{suggested_topic.id} }"
+
           suggested_topic.user_votes.create!(user: current_user)
 
           render json: suggested_topic, status: 201
