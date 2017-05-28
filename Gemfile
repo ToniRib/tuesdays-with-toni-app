@@ -10,6 +10,7 @@ gem 'pg'
 gem 'bcrypt'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'pry'
